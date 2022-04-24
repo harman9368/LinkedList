@@ -1,0 +1,155 @@
+public class Lengthofsinglylinkedlist {
+    private Listnode head;
+
+    private static class Listnode {
+        private int data;//generic type
+        private Listnode next;
+
+        //constructor
+        public Listnode(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    public void print() {
+        Listnode current = head;
+        while (current != null) {
+            System.out.print(current.data + "-->");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+
+    public int length() {
+        int count = 0;
+        Listnode current = head;
+        while (current != null) {
+            current = current.next;
+            count++;
+        }
+        return count;
+    }
+    public void Insertfirst(int data){
+        Listnode newnode =new Listnode(data);
+        //if(head == null){
+          //  head = newnode;
+        //}
+        //Listnode newnode =new Listnode(data);
+        newnode.next = head;
+        head = newnode;
+    }
+    public void InsertLast(int data){
+        Listnode newnode = new Listnode(data);
+        if(head == null){
+            head = newnode;
+        }
+        Listnode current = head;
+        while(current.next != null){
+            current = current.next;
+        }
+        current.next = newnode;
+    }
+    public void Insertatposition(int position,int data){
+        Listnode newnode = new Listnode(data);
+        if(position == 1){
+            newnode.next = head;
+            head = newnode;
+        }else
+        {
+            Listnode previous = head;
+            int count = 1;
+            //important step
+            while(count < position - 1){
+                previous = previous.next;
+                count++;
+            }
+            Listnode current = previous.next;
+            newnode.next = current;
+            previous.next = newnode;
+        }
+
+    }
+    public Listnode deletefirst(){
+        if(head == null){
+            return null;
+        }
+        Listnode temp  = head;
+        head = head.next;
+        temp.next = null;
+        return temp;
+    }
+    public Listnode deletelast(){
+        // important
+        if(head == null || head.next == null){
+            return head;
+        }
+        Listnode current = head;
+        Listnode previous = null;
+        while(current.next != null){
+            //current = current.next;
+            previous = current;
+            current = current.next;
+        }
+        previous.next = null;
+        return current;
+    }
+    public void deleteatposition(int position) {
+        if (position == 1) {
+            head = head.next;
+        } else {
+            Listnode previous = head;
+            int count = 1;
+            // important step
+            while (count < position - 1) {
+                previous = previous.next;
+                count++;
+            }
+            Listnode current = previous.next;
+            previous.next = current.next;
+            //return count;
+            //return current;
+        }
+        //return current;
+    }
+
+        public static void main (String[]args){
+            Lengthofsinglylinkedlist L = new Lengthofsinglylinkedlist();
+            //L.head = new Listnode(10);
+            //Listnode second = new Listnode(8);
+            //Listnode third = new Listnode(9);
+            //Listnode fourth = new Listnode(11);
+            //L.head.next = second;
+            //second.next = third;
+            //third.next = null;
+            // fourth.next = null;
+            //System.out.println(L);
+            //L.print();
+            //System.out.println(L.length());
+            L.Insertfirst(11);
+            L.Insertfirst(12);
+            L.Insertfirst(13);
+            L.Insertfirst(90);
+            L.InsertLast(67);
+            L.Insertfirst(44);
+            L.Insertfirst(87);
+            L.InsertLast(89);
+            L.Insertatposition(4,84);
+            L.InsertLast(45);
+           // L.print();
+            //L.deletefirst();
+            //important step
+            //System.out.println(L.deletefirst().data);
+           // L.print();
+            //L.deletelast();
+            //L.deletelast();
+            //System.out.println(L.deletelast().data);
+            //L.deleteatposition(4);
+            //L.deleteatposition(3);
+            L.deleteatposition(1);
+            L.deleteatposition(2);
+           // System.out.println(L.deleteatposition(4).data);
+            L.print();
+        }
+    }
